@@ -1,1 +1,1 @@
-the point of this file to create the optical paratmersms of ws2 and wse2 at low tempetures by taking room tempture data, fitting the data to extract optical params, then changing the params based on papers, then using the new params we create low tempeture optical parameters.
+the point of this this program is to create the optical paratmersms of ws2 and wse2 at low tempetures by taking room tempture data, fitting the data to extract optical params, then changing the params based on papers, then using the new params we create low tempeture optical parameters.

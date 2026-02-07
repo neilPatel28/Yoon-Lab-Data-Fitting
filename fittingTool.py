@@ -5,29 +5,6 @@ import tauc_lorentz_model as tlm
 import intialGuessStartingPoint as gs
 
 
-"""
-Run couple of times until it works
-
-Best ws2: Iteration 8: delta = 2.678e-04
-Fitted parameters[Ei,Ai,Ci(width),Eg]:
-[1.40297001e+02 1.15183473e+01 2.95616242e+00 2.92483712e-01
- 4.27646826e-01 1.99807325e+00 1.97311076e+00 4.71331035e-01
- 5.82731386e-02 1.80029956e+00 2.37185291e+00 1.18930408e-01
- 2.28297482e-01 1.87449362e+00 2.69456857e+00 1.17254844e-01
- 2.23229104e-01 1.73045554e+00]
- 
-Best wse2 Iteration 5: delta = 1.724e+-01
-Fitted parameters[Ei,Ai,Ci(width),Eg]:
-[3.55056955e+01 4.78836239e+00 2.90640824e+00 5.81521714e-01
- 5.29399239e-01 3.99176390e-01 2.42574793e+00 1.44599416e-01
- 3.55051370e-01 1.19803598e-12 1.66965808e+00 2.16462602e-01
- 6.43666142e-02 1.03755299e+00 2.08861547e+00 5.74162675e-02
- 2.49299310e-01 5.82112101e-11]
-
-"""
-
-
-
 class Fitter:
     def __init__(self, filedata,energy=None,er_vals=None):
         # need functionality so we can fit datafiles (w,n,k) or python varrribalies (eV,er)
@@ -207,33 +184,3 @@ class Fitter:
         plt.tight_layout()
         plt.show()
 
-if __name__ == "__main__":
-    # Load data
-    data = np.loadtxt(
-        r"wse2index.txt"
-    )
-
-    guess = gs.InitialGuessCreator(data)
-
-    directguess = guess.create_guess()
-    print(directguess)
-
-    # Create fitter object
-    fitter = Fitter(data)
-
-    # Run fit
-    popt = fitter.fit(directguess)
-
-    # Print parameters
-    print("Fitted parameters[Ei,Ai,Ci(width),Eg]:")
-    print(popt)
-    print("Scale and Add:", popt[:2])
-    osc_params = popt[2:]
-    n_osc = len(osc_params) // 4
-    for i in range(n_osc):
-        start = i * 4
-        end = start + 4
-        print(f"Oscillator {i + 1}:", osc_params[start:end])
-
-    # Plot results
-    fitter.plot_fit()
